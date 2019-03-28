@@ -1,7 +1,0 @@
-hwpe-stream:
-  commit: new-doc
-  group: pulp-platform
-hwpe-ctrl:
-  commit: devel
-  group: pulp-platform
-

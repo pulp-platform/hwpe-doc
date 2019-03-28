@@ -1,0 +1,9 @@
+[submodule "ips/hwpe-stream"]
+	path = ips/hwpe-stream
+	url = https://github.com/pulp-platform/hwpe-stream
+[submodule "ips/hwpe-ctrl"]
+	path = ips/hwpe-ctrl
+	url = https://github.com/pulp-platform/hwpe-ctrl
+[submodule "_ext/svprettyplot"]
+	path = _ext/svprettyplot
+	url = https://github.com/FrancescoConti/svprettyplot
