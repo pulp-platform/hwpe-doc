@@ -20,8 +20,8 @@ sys.path.append(os.path.abspath("./_ext"))
 # -- Project information -----------------------------------------------------
 
 project = 'Hardware Processing Engines - Interface Specifications'
-copyright = '2013-2019, ETH Zurich and University of Bologna'
-author = 'Francesco Conti (f.conti@unibo.it)'
+copyright = 'ETH Zurich and University of Bologna (Francesco Conti -- f.conti@unibo.it).'
+author = copyright
 
 # The short X.Y version
 version = ''
