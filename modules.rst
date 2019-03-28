@@ -134,6 +134,36 @@ hwpe_stream_addressgen
 
     \clearpage
 
+hwpe_stream_strbgen
+----------------------
+
+.. _hwpe_stream_strbgen:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_strbgen.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hwpe_stream_sink_realign
+----------------------
+
+.. _hwpe_stream_sink_realign:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_sink_realign.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hwpe_stream_source_realign
+----------------------
+
+.. _hwpe_stream_source_realign:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_source_realign.sv
+
+.. raw:: latex
+
+    \clearpage
+
 .. Source realigner
 .. ----------------
 
