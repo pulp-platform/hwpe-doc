@@ -170,14 +170,6 @@ hwpe_stream_source
 .. _hwpe_stream_source:
 .. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_source.sv
 
-.. _hwpe_stream_source_archi:
-.. figure:: img/hwpe_stream_source_archi.*
-  :figwidth: 100%
-  :width: 100%
-  :align: center
-
-  Architecture of the source streamer.
-
 .. raw:: latex
 
     \clearpage
