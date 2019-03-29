@@ -135,7 +135,7 @@ hwpe_stream_addressgen
     \clearpage
 
 hwpe_stream_strbgen
-----------------------
+-------------------
 
 .. _hwpe_stream_strbgen:
 .. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_strbgen.sv
@@ -145,7 +145,7 @@ hwpe_stream_strbgen
     \clearpage
 
 hwpe_stream_sink_realign
-----------------------
+------------------------
 
 .. _hwpe_stream_sink_realign:
 .. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_sink_realign.sv
@@ -155,7 +155,7 @@ hwpe_stream_sink_realign
     \clearpage
 
 hwpe_stream_source_realign
-----------------------
+--------------------------
 
 .. _hwpe_stream_source_realign:
 .. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_source_realign.sv
@@ -165,7 +165,7 @@ hwpe_stream_source_realign
     \clearpage
 
 hwpe_stream_source
-----------------------
+------------------
 
 .. _hwpe_stream_source:
 .. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_source.sv
@@ -183,7 +183,7 @@ hwpe_stream_source
     \clearpage
 
 hwpe_stream_sink
-----------------------
+----------------
 
 .. _hwpe_stream_sink:
 .. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_sink.sv
