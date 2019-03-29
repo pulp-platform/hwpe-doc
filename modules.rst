@@ -161,7 +161,7 @@ hwpe_stream_tcdm_mux_static
     \clearpage
 
 hwpe_stream_tcdm_reorder
---------------------
+------------------------
 
 .. _hwpe_stream_tcdm_reorder:
 .. svprettyplot:: ./ips/hwpe-stream/rtl/tcdm/hwpe_stream_tcdm_reorder.sv
@@ -170,15 +170,15 @@ hwpe_stream_tcdm_reorder
 
     \clearpage
 
-hwpe_stream_tcdm_reorder_static
----------------------------
+.. hwpe_stream_tcdm_reorder_static
+.. -------------------------------
 
-.. _hwpe_stream_tcdm_reorder_static:
-.. svprettyplot:: ./ips/hwpe-stream/rtl/tcdm/hwpe_stream_tcdm_reorder_static.sv
+.. .. _hwpe_stream_tcdm_reorder_static:
+.. .. svprettyplot:: ./ips/hwpe-stream/rtl/tcdm/hwpe_stream_tcdm_reorder_static.sv
 
-.. raw:: latex
+.. .. raw:: latex
 
-    \clearpage
+..     \clearpage
 
 Streamer modules
 ================
