@@ -3,8 +3,8 @@
 HWPE Interface Modules: Data Movement \& Marshaling
 ***************************************************
 
-HWPE-Stream basic modules
-=========================
+Basic modules (HWPE-Stream)
+===========================
 
 Basic HWPE-Stream management modules are used to select multiple streams,
 merge multiple streams into one, split a stream in multiple ones, synchronize
@@ -107,6 +107,39 @@ hwpe_stream_fifo_ctrl
 
     \clearpage
 
+Basic modules (HWPE-Mem / HWPE-MemDecoupled)
+============================================
+
+Basic HWPE-Mem management modules are used to delay/enqueue HWPE-MemDecoupled
+interfaces, multiplex multiple HWPE-Mem, or reorder them before hooking the
+accelerator to a Tightly-Coupled Data Memory (TCDM).
+Modules performing these functions can be found within the `rtl/tcdm`
+subfolder of the `hwpe-stream` repository.
+
+.. raw:: latex
+
+    \clearpage
+
+hwpe_stream_tcdm_fifo_store
+---------------------------
+
+.. _hwpe_stream_tcdm_fifo_store:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/tcdm/hwpe_stream_tcdm_fifo_store.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hwpe_stream_tcdm_fifo_load
+--------------------------
+
+.. _hwpe_stream_tcdm_fifo_load:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/tcdm/hwpe_stream_tcdm_fifo_load.sv
+
+.. raw:: latex
+
+    \clearpage
+
 Streamer modules
 ================
 
@@ -119,6 +152,31 @@ of a stream, and the main streamer source and sink modules used to put
 these functions together.
 Modules performing these functions can be found within the `rtl/streamer`
 subfolder of the `hwpe-stream` repository.
+
+Two main streamer modules (**hwpe_stream_source** and **hwpe_stream_sink**)
+are composite of several other IPs, including address generation and
+strobe generation blocks included in this section, as well as of basic
+HWPE-Stream management blocks.
+
+.. raw:: latex
+
+    \clearpage
+
+hwpe_stream_source
+------------------
+
+.. _hwpe_stream_source:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_source.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hwpe_stream_sink
+----------------
+
+.. _hwpe_stream_sink:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_sink.sv
 
 .. raw:: latex
 
@@ -159,26 +217,6 @@ hwpe_stream_source_realign
 
 .. _hwpe_stream_source_realign:
 .. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_source_realign.sv
-
-.. raw:: latex
-
-    \clearpage
-
-hwpe_stream_source
-------------------
-
-.. _hwpe_stream_source:
-.. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_source.sv
-
-.. raw:: latex
-
-    \clearpage
-
-hwpe_stream_sink
-----------------
-
-.. _hwpe_stream_sink:
-.. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_sink.sv
 
 .. raw:: latex
 
