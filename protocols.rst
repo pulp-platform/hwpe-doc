@@ -385,8 +385,9 @@ request phase, is buffered by the slave peripherals and accompanies the
 response phase as *r_id*. In this way, multiple masters can distinguish
 which traffic is related to themselves.
 For the rest of the purposes related with HWPEs, HWPE-Periph and HWPE-Mem work
-in the same way.
-
+in the same way. In particular, similarly to HWPE-Mem, PULP clusters will expect
+*r_valid* to be asserted after write transactions. This is enforced also in
+HWPE IPs.
 
 .. -  The **hwpe_stream_addressgen** module is responsible of generating
 ..    addresses according to a pattern of 3D blocks characterized by width,
