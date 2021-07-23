@@ -158,8 +158,9 @@ HWPE-Mem
 
 HWPEs are connected to external L1/L2 shared-memory by means of a simple
 memory protocol, using a request/grant handshake. The protocol used is
-called HWPE Memory (*HWPE-Mem*) protocol, and it is essnetially similar
-to the protocol used by cores and DMAs operating on memories.
+called HWPE Memory (*HWPE-Mem*) protocol, and it is essentially similar
+to the protocol used by cores and DMAs operating on memories in standard
+PULP clusters.
 This document focuses on the specific signal names used within HWPEs
 and in the reference implementation of HWPE-Stream IPs.
 It supports neither multiple outstanding transactions nor bursts, as
@@ -261,6 +262,138 @@ HWPE-Stream streams.
 Once two or more HWPE-MemDecoupled transactions are mixed, the mixed
 interface has to be treated as a HWPE-Mem protocol (i.e. it is sensitive
 to latency).
+
+HCI-Core
+--------
+
+HCI-Core (Heterogeneous Cluster Interconnect -- Core) is a protocol designed
+as a lighteweight extension of HWPE-Mem better suited for the needs of
+accelerators, and specifically of cluster-coupled HWPEs.
+This document focuses on the specific signal names used within HWPEs
+and in the reference implementation of HCI IPs.
+HCI-Core supports does not support bursts, but it supports in-order multiple
+outstanding transactions in a similar fashion to HWPE-MemDecoupled.
+Differently from HWPE-Mem, HCI-Core uses a two signal *handshake* but also
+includes a special `lrdy` signal to support load response backpressure.
+HCI-Core carries two phases, a *request* and a *response*.
+HCI-Core signals have parametric width; :numref:`hci_parameters` reports the
+parameters used by the HCI IPs; while :numref:`hci_signals` reports the signals
+used by the HCI-Core protocol.
+
+.. _hci_core_parameters:
+.. table:: HCI-Core parameters.
+
+  +---------------+-------------------------------------------------+-------------+---------------------+
+  | **Parameter** | **Description**                                 | **Default** | **Range**           |
+  +---------------+-------------------------------------------------+-------------+---------------------+
+  | *DW*          | Data width in bits                              | 32          | mult. of *BW*, *WW* |
+  +---------------+-------------------------------------------------+-------------+---------------------+
+  | *AW*          | Address width in bits                           | 32          | 1-32                |
+  +---------------+-------------------------------------------------+-------------+---------------------+
+  | *BW*          | Width of an individually strobed "byte" in bits | 8           | 1-32                |
+  +---------------+-------------------------------------------------+-------------+---------------------+
+  | *WW*          | Width of a memory bank ("word") in bits         | 32          | mult. of *BW*       |
+  +---------------+-------------------------------------------------+-------------+---------------------+
+  | *OW*          | Intra-bank offset width                         | 32          | 1-32                |
+  +---------------+-------------------------------------------------+-------------+---------------------+
+  | *UW*          | User-defined      width                         | 0           | 0-any               |
+  +---------------+-------------------------------------------------+-------------+---------------------+
+
+.. _hci_core_signals:
+.. table:: HCI-Core signals.
+
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | **Signal** | **Size**             | **Phase**   | **Description**                                                       | **Direction**       |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *req*      | 1 bit                | Request HS  | Request valid (1=asserted).                                           | *master* to *slave* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *gnt*      | 1 bit                | Request HS  | Request granted (1=asserted).                                         | *slave* to *master* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *r_valid*  | 1 bit                | Response HS | Response valid (1=asserted). Mandatory for load, optional for stores. | *slave* to *master* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *lrdy*     | 1 bit                | Response HS | Response load ready (1=asserted).                                     | *master* to *slave* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *add*      | *AW* bit             | Request     | Word-aligned memory address.                                          | *master* to *slave* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *wen*      | 1 bit                | Request     | Write enable signal (1=read, 0=write).                                | *master* to *slave* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *be*       | *DW/BW* bit          | Request     | Byte enable signal (1=valid byte).                                    | *master* to *slave* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *boffs*    | *DW/WW* x *OW* bit   | Request     | Intra-bank offset.                                                    | *master* to *slave* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *data*     | *DW* bit             | Request     | Data word to be stored.                                               | *master* to *slave* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *user*     | *UW* bit             | Request     | User-defined.                                                         | *master* to *slave* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *r_data*   | 32 bit               | Response    | Loaded data word.                                                     | *slave* to *master* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *r_opc*    | 1 bit                | Response    | Error code response.                                                  | *slave* to *master* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *r_user*   | *UW* bit             | Request     | User-defined.                                                         | *slave* to *master* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  
+The two phases of HCI-Core transactions can be treated as two separate channels,
+so HCI-Core transactions can be latency insensitive and support multiple
+in-order outstanding transactions (i.e., pipeline transactions).
+Request and response phases are organized to be treated like HWPE-Stream streams.
+:numref:`hci_core_request_rules` and :numref:`hci_core_response_rules` detail
+the rules that have to be followed for a valid transaction.
+
+.. _hci_core_request_rules:
+.. table:: HCI-Core Request phase rules.
+
+  +--------------+----------------------------------------------------------------+
+  | **Rule**     | **Description**                                                |
+  +----------------+--------------------------------------------------------------+
+  | RQ-1         | A valid handshake occurs in the cycle when both *req* and      |
+  | *HANDSHAKE*  | *gnt* are asserted, for both write and read transactions.      |
+  |              | All request phase signals are sampled on handshake cycles.     |
+  +--------------+----------------------------------------------------------------+
+  | RQ-2         | The assertion of *req* (transition 0 to 1) cannot depend       |
+  | *NODEADLOCK* | combinationally on the state of *gnt*. On the other hand,      |
+  |              | the assertion of *gnt* (transition 0 to 1) can depend          |
+  |              | combinationally on the state of *req*. This rule avoids        |
+  |              | deadlocks in ping-pong logic.                                  |
+  +--------------+----------------------------------------------------------------+
+  | RQ-3         | Request phase signals can change their value either in the     |
+  | *STABILITY*  | cycle following a handshake, regardless if *req* is            |
+  |              | deasserted or stays asserted.                                  |
+  +--------------+----------------------------------------------------------------+
+  | RQ-OPT-3     | (Optional) Requests cannot be retired after *req* is asserted. |
+  | *NORETIRE*   | HCI accelerators satisfy this indication, but not all masters  |
+  |              | on HCI interconnects might be fully compliant.                 |
+  +--------------+----------------------------------------------------------------+
+
+  .. _hci_core_response_rules:
+  .. table:: HCI-Core Response phase rules.
+  
+    +--------------+---------------------------------------------------------------+
+    | **Rule**     | **Description**                                               |
+    +----------------+-------------------------------------------------------------+
+    | RSP-1        | For read transactions, a valid handshake occurs in the cycle  |
+    | *HANDSHAKE*  | when both *r_valid* and *lrdy* are asserted.                  |
+    |              | All response phase signals are sampled on handshake cycles.   |
+    +--------------+---------------------------------------------------------------+
+    | RSP-2        | The assertion of *r_valid* (transition 0 to 1) cannot depend  |
+    | *NODEADLOCK* | combinationally on the state of *lrdy*. On the other hand,    |
+    |              | the assertion of *lrdy* (transition 0 to 1) can depend        |
+    |              | combinationally on the state of *r_valid*. This rule avoids   |
+    |              | deadlocks in ping-pong logic.                                 |
+    +--------------+---------------------------------------------------------------+
+    | RSP-3        | Response phase signals can change their value either in the   |
+    | *STABILITY*  | cycle following a handshake, regardless if *r_valid* is       |
+    |              | deasserted or stays asserted.                                 |
+    +--------------+---------------------------------------------------------------+
+    | RSP-4        | Response phase signals must follow the same ordering of the   |
+    | *ORDERING*   | requests.                                                     |
+    +--------------+---------------------------------------------------------------+
+
+.. _wavedrom_hci_core:
+.. wavedrom:: wavedrom/hci_core.json
+   :width: 100 %
+   :caption: Example of a HCI-Core transaction with *DW*=16-bit.
+
+:numref:`wavedrom_hci_core` shows an example of a correct HCI-Core transaction.
 
 Exchanging data between HWPE-Mem and HWPE-Stream
 ------------------------------------------------
