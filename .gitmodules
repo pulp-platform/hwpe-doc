@@ -9,4 +9,4 @@
 	url = https://github.com/FrancescoConti/svprettyplot
 [submodule "ips/hci"]
 	path = ips/hci
-	url = git@github.com:pulp-platform/hci
+	url = https://github.com/pulp-platform/hci
