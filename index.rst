@@ -42,6 +42,7 @@ divided in a **streamer** interface towards the memory system, a
 
   protocols
   modules
+  github
   papers
   chips
   revisions
