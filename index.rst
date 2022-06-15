@@ -23,9 +23,6 @@ readily intermixed with software code, because all that needs to be
 exchanged between the two is a set of pointers and, if necessary, a few
 parameters.
 
-For more information on HWPEs and their properties, see references
-[1]-[5].
-
 .. figure:: img/hwpe.*
   :figwidth: 90%
   :width: 90%
@@ -43,9 +40,11 @@ divided in a **streamer** interface towards the memory system, a
   :maxdepth: 3
   :caption: Contents:
 
-  revisions
   protocols
   modules
+  papers
+  chips
+  revisions
 
 .. raw:: latex
 
