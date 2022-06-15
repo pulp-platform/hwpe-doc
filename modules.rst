@@ -180,8 +180,60 @@ hwpe_stream_tcdm_reorder
 
 ..     \clearpage
 
-Streamer modules
-================
+HCI Streamer modules
+====================
+
+Streamer modules constitute the heart of the IPs use to interface HWPEs
+with a PULP system. They include all the modules that are used to
+generate HWPE-Streams from address patterns on the TCDM, including the
+address generation itself, data realignment to enable access to data located
+at non-byte-aligned addresses, strobe generation to selectively disable parts
+of a stream, and the main streamer source and sink modules used to put
+these functions together.
+HCI Modules performing these functions can be found within the `rtl/core`
+subfolder of the `hci` repository.
+
+Two main streamer modules (**hci_core_source** and **hci_core_sink**)
+are composite of several other IPs, including address generation and
+strobe generation blocks included in this section, as well as of basic
+HWPE-Stream management blocks.
+
+hci_core_source
+---------------
+
+.. _hci_core_source:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_source.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_sink
+-------------
+
+.. _hci_core_sink:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_sink.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hwpe_stream_addressgen_v3
+-------------------------
+
+.. _hwpe_stream_addressgen_v3:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_addressgen_v3.sv
+
+.. raw:: latex
+
+    \clearpage
+
+Plain HWPE-Mem Streamer modules (deprecated)
+===========================================
+
+The "plain" HWPE-Mem Streamer modules, although still functional, have
+generally been superseded by the HCI Streamer modules. We suggest using
+those for new designs.
 
 Streamer modules constitute the heart of the IPs use to interface HWPEs
 with a PULP system. They include all the modules that are used to

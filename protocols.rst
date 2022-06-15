@@ -3,41 +3,6 @@
 HWPE Interface Protocols
 ************************
 
-Introduction
-============
-
-*Hardware Processing Engines* (HWPEs) are special-purpose,
-memory-coupled accelerators that can be inserted in the SoC or cluster
-of a PULP system to amplify its performance and energy efficiency in
-particular tasks.
-
-Differently from most accelerators in literature, HWPEs do not rely on
-an external DMA to feed them with input and to extract output, and they
-are not (necessarily) tied to a single core. Rather, they operate
-directly on the same memory that is shared by other elements in the PULP
-system (e.g. the L1 TCDM in a PULP cluster, or the shared L2 in
-PULPissimo). Their control is memory-mapped and accessed through a
-peripheral bus or interconnect. HW-based execution on an HWPE can be
-readily intermixed with software code, because all that needs to be
-exchanged between the two is a set of pointers and, if necessary, a few
-parameters.
-
-For more information on HWPEs and their properties, see references
-[1]-[5].
-
-.. figure:: img/hwpe.*
-  :figwidth: 90%
-  :width: 90%
-  :align: center
-
-  Template of a Hardware Processing Engine  (HWPE).
-
-This document defines the interface protocols and modules that are used
-to enable connecting HWPEs in a PULP system. Typically, such a module is
-divided in a **streamer** interface towards the memory system, a
-**control/peripheral** interface used for programming it, and an
-**engine** containing the actual datapath of the accelerator.
-
 HWPE-Stream protocol
 ====================
 
@@ -150,8 +115,8 @@ contain meaningful data. HWPE-Stream streams in which *strb* is absent
 are assumed to have only valid bytes in their *data* payload. We refer
 HWPE-Stream streams with *strb* as *strobed streams*.
 
-HWPE-Mem protocols
-==================
+HWPE-Mem and HCI-Core protocols
+===============================
 
 HWPE-Mem
 --------
@@ -271,10 +236,10 @@ as a lighteweight extension of HWPE-Mem better suited for the needs of
 accelerators, and specifically of cluster-coupled HWPEs.
 This document focuses on the specific signal names used within HWPEs
 and in the reference implementation of HCI IPs.
-HCI-Core supports does not support bursts, but it supports in-order multiple
+HCI-Core does not support bursts, but it supports in-order multiple
 outstanding transactions in a similar fashion to HWPE-MemDecoupled.
 Differently from HWPE-Mem, HCI-Core uses a two signal *handshake* but also
-includes a special `lrdy` signal to support load response backpressure.
+includes an `lrdy` signal to support load backpressure on the response phase.
 HCI-Core carries two phases, a *request* and a *response*.
 HCI-Core signals have parametric width; :numref:`hci_parameters` reports the
 parameters used by the HCI IPs; while :numref:`hci_signals` reports the signals
@@ -405,7 +370,7 @@ memory-based and the stream-based worlds) is one of the main tasks to be
 accomplished in the design of an accelerator. The HWPE-Stream and HWPE-Mem
 protocols are similar by design, which makes the handling of handshakes
 signficantly easier.
-The following applies to HWPE-Mem and HWPE-MemDecoupled in a similar
+The following applies to HWPE-Mem, HWPE-MemDecoupled, and HCI-Core in a similar
 manner.
 
 Three objectives have to be met:
