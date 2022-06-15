@@ -26,8 +26,8 @@ python:
 
 submodules:
   include:
+     - ips/hci
      - ips/hwpe-stream
      - ips/hwpe-ctrl
-     - ips/hci
      - _ext/svprettyplot
   recursive: false
