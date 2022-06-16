@@ -45,6 +45,7 @@ divided in a **streamer** interface towards the memory system, a
   github
   papers
   chips
+  team
   revisions
 
 .. raw:: latex
