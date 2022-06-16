@@ -13,7 +13,7 @@ PULP chips
 ==========
 
 .. list-table:: PULP chips
-  :widths: 50 10 40
+  :widths: 40 10 30
 
   * - Chip
     - Year
@@ -57,7 +57,7 @@ PULP chips
         :width: 40%                                       
         :align: center                                    
     - 2020
-    - PULP cluster with *HWCE*v4
+    - PULP cluster with *HWCE* v4
   * - **Xavier** http://asic.ethz.ch/2019/Xavier.html
                                                           
       .. figure:: http://asic.ethz.ch/2019/Xavier_www.png
@@ -81,7 +81,7 @@ PULP chips
         :width: 40%                                      
         :align: center                                   
     - 2017
-    - Commercial SoC including *HWCE*v3
+    - Commercial SoC including *HWCE* v3
   * - **Fulmine** http://asic.ethz.ch/2015/Fulmine.html
                                                          
       .. figure:: http://asic.ethz.ch/2015/Fulmine_www.png
@@ -89,7 +89,7 @@ PULP chips
         :width: 40%                                       
         :align: center                                    
     - 2015
-    - PULP cluster design with *HWCE*v2, *HWCrypt* (the latter follows the HWPE template but does not use HWPE IPs)
+    - PULP cluster design with *HWCE* v2, *HWCrypt* (the latter follows the HWPE template but does not use HWPE IPs)
   * - **Mia Wallace** http://asic.ethz.ch/2015/Mia_Wallace.html
                                                          
       .. figure:: http://asic.ethz.ch/2015/Mia_Wallace_www.png
@@ -97,7 +97,7 @@ PULP chips
         :width: 40%                                       
         :align: center                                    
     - 2015
-    - PULP cluster design with *HWCE*v1
+    - PULP cluster design with *HWCE* v1
   * - **PULP3** http://asic.ethz.ch/2015/Pulpv3.html
                                                          
       .. figure:: http://asic.ethz.ch/2015/Pulpv3_www.png
@@ -105,5 +105,5 @@ PULP chips
         :width: 40%                                       
         :align: center                                    
     - 2015
-    - PULP cluster design with *HWCE*v1
+    - PULP cluster design with *HWCE* v1
     

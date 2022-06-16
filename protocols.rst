@@ -329,29 +329,29 @@ the rules that have to be followed for a valid transaction.
   |              | on HCI interconnects might be fully compliant.                 |
   +--------------+----------------------------------------------------------------+
 
-  .. _hci_core_response_rules:
-  .. table:: HCI-Core Response phase rules.
-  
-    +--------------+---------------------------------------------------------------+
-    | **Rule**     | **Description**                                               |
-    +----------------+-------------------------------------------------------------+
-    | RSP-1        | For read transactions, a valid handshake occurs in the cycle  |
-    | *HANDSHAKE*  | when both *r_valid* and *lrdy* are asserted.                  |
-    |              | All response phase signals are sampled on handshake cycles.   |
-    +--------------+---------------------------------------------------------------+
-    | RSP-2        | The assertion of *r_valid* (transition 0 to 1) cannot depend  |
-    | *NODEADLOCK* | combinationally on the state of *lrdy*. On the other hand,    |
-    |              | the assertion of *lrdy* (transition 0 to 1) can depend        |
-    |              | combinationally on the state of *r_valid*. This rule avoids   |
-    |              | deadlocks in ping-pong logic.                                 |
-    +--------------+---------------------------------------------------------------+
-    | RSP-3        | Response phase signals can change their value either in the   |
-    | *STABILITY*  | cycle following a handshake, regardless if *r_valid* is       |
-    |              | deasserted or stays asserted.                                 |
-    +--------------+---------------------------------------------------------------+
-    | RSP-4        | Response phase signals must follow the same ordering of the   |
-    | *ORDERING*   | requests.                                                     |
-    +--------------+---------------------------------------------------------------+
+.. _hci_core_response_rules:
+.. table:: HCI-Core Response phase rules.
+
+  +--------------+---------------------------------------------------------------+
+  | **Rule**     | **Description**                                               |
+  +----------------+-------------------------------------------------------------+
+  | RSP-1        | For read transactions, a valid handshake occurs in the cycle  |
+  | *HANDSHAKE*  | when both *r_valid* and *lrdy* are asserted.                  |
+  |              | All response phase signals are sampled on handshake cycles.   |
+  +--------------+---------------------------------------------------------------+
+  | RSP-2        | The assertion of *r_valid* (transition 0 to 1) cannot depend  |
+  | *NODEADLOCK* | combinationally on the state of *lrdy*. On the other hand,    |
+  |              | the assertion of *lrdy* (transition 0 to 1) can depend        |
+  |              | combinationally on the state of *r_valid*. This rule avoids   |
+  |              | deadlocks in ping-pong logic.                                 |
+  +--------------+---------------------------------------------------------------+
+  | RSP-3        | Response phase signals can change their value either in the   |
+  | *STABILITY*  | cycle following a handshake, regardless if *r_valid* is       |
+  |              | deasserted or stays asserted.                                 |
+  +--------------+---------------------------------------------------------------+
+  | RSP-4        | Response phase signals must follow the same ordering of the   |
+  | *ORDERING*   | requests.                                                     |
+  +--------------+---------------------------------------------------------------+
 
 .. _wavedrom_hci_core:
 .. wavedrom:: wavedrom/hci_core.json

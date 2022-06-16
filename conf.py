@@ -19,14 +19,14 @@ sys.path.append(os.path.abspath("./_ext"))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Hardware Processing Engines - Interface Specifications'
-copyright = 'ETH Zurich and University of Bologna (Francesco Conti -- f.conti@unibo.it).'
+project = 'Hardware Processing Engines'
+copyright = 'ETH Zurich and University of Bologna (Francesco Conti - f.conti@unibo.it).'
 author = copyright
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.4'
+release = '2.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -81,22 +81,24 @@ pygments_style = None
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'                           
                                                                                  
 if not on_rtd:  # only import and set the theme if we're building docs locally   
-    import sphinx_rtd_theme                                                      
-    html_theme = 'sphinx_rtd_theme'                                              
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]                   
+    html_theme = 'sphinx_book_theme'
+    # import sphinx_rtd_theme                                                      
+    # html_theme = 'sphinx_rtd_theme'                                              
+    # html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]                   
     # Override default css to get a larger width for local build                 
     def setup(app):                                                              
         #app.add_javascript("custom.js")                                         
         app.add_stylesheet('theme_overrides.css')                                
-else:                                                                            
+else:                 
+    html_theme = 'sphinx_book_theme'                                                           
     # Override default css to get a larger width for ReadTheDoc build            
-    html_context = {                                                             
-        'css_files': [                                                           
-            'https://media.readthedocs.org/css/sphinx_rtd_theme.css',            
-            'https://media.readthedocs.org/css/readthedocs-doc-embed.css',       
-            '_static/theme_overrides.css',                                       
-        ],                                                                       
-    }
+    # html_context = {                                                             
+    #     'css_files': [                                                           
+    #         'https://media.readthedocs.org/css/sphinx_rtd_theme.css',            
+    #         'https://media.readthedocs.org/css/readthedocs-doc-embed.css',       
+    #         '_static/theme_overrides.css',                                       
+    #     ],                                                                       
+    # }
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -150,7 +152,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'hwpe_intf_specs.tex', 'Hardware Processing Engines\\\\ Interface Specifications',
+    (master_doc, 'hwpe_intf_specs.tex', 'Hardware Processing Engines',
      'Francesco Conti', 'manual'),
 ]
 
@@ -160,7 +162,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'hwpe_intf_specs', 'Hardware Processing Engines - Interface Specifications',
+    (master_doc, 'hwpe_intf_specs', 'Hardware Processing Engines',
      [author], 1)
 ]
 
@@ -171,7 +173,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'hwpe_intf_specs', 'Hardware Processing Engines - Interface Specifications',
+    (master_doc, 'hwpe_intf_specs', 'Hardware Processing Engines',
      author, 'hwpe_intf_specs', 'One line description of project.',
      'Miscellaneous'),
 ]
