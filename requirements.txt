@@ -1,3 +1,4 @@
 pydotplus
 sphinxcontrib-wavedrom
 sphinx-book-theme
+wavedrompy
