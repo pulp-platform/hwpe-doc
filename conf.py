@@ -44,6 +44,9 @@ extensions = [
     'svprettyplot.sphinx_sv_prettyplot'
 ]
 
+# use wavedrompy
+render_using_wavedrompy = True
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
