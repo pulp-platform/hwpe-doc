@@ -48,6 +48,6 @@ HWPE template
 
 Other authors
 =============
-- **TinyVers** from Marian Verhelst's team at KU Leuven: V. Jain, S. Giraldo, J. De Roose, B. Boons, L. Mei, M. Verhelst, "TinyVers: A 0.8-17 TOPS/W, 1.7 μW-20 mW, Tiny Versatile System-on-chip with State-Retentive eMRAM for Machine Learning Inference at the Extreme Edge", VLSI 2022 (to appear)
+- **TinyVers** from Marian Verhelst's team at KU Leuven: V. Jain, S. Giraldo, J. De Roose, B. Boons, L. Mei, M. Verhelst, "TinyVers: A 0.8-17 TOPS/W, 1.7 μW-20 mW, Tiny Versatile System-on-chip with State-Retentive eMRAM for Machine Learning Inference at the Extreme Edge", VLSI 2022, doi: 10.1109/VLSITechnologyandCir46769.2022.9830409.
 - **DIANA** from Marian Verhelst's team at KU Leuven: K. Ueyoshi et al., "DIANA: An End-to-End Energy-Efficient Digital and ANAlog Hybrid Neural Network SoC," 2022 IEEE International Solid- State Circuits Conference (ISSCC), 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731716.
 - **PULPO** from Christoph Studer's team at ETH Zurich: O. Castañeda, L. Benini and C. Studer, "A 283 pJ/b 240 Mb/s Floating-Point Baseband Accelerator for Massive MU-MIMO in 22FDX," ESSCIRC 2022- IEEE 48th European Solid State Circuits Conference (ESSCIRC), 2022, pp. 357-360, doi: 10.1109/ESSCIRC55480.2022.9911311.
