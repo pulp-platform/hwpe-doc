@@ -15,8 +15,8 @@ build:
   image: latest
 
 # Optionally build your docs in additional formats such as PDF and ePub
-formats:
-  - pdf
+# formats:
+#   - pdf
 
 # Optionally set the version of Python and requirements required to build your docs
 python:
