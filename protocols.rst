@@ -241,8 +241,8 @@ outstanding transactions in a similar fashion to HWPE-MemDecoupled.
 Differently from HWPE-Mem, HCI-Core uses a two signal *handshake* but also
 includes an `lrdy` signal to support load backpressure on the response phase.
 HCI-Core carries two phases, a *request* and a *response*.
-HCI-Core signals have parametric width; :numref:`hci_parameters` reports the
-parameters used by the HCI IPs; while :numref:`hci_signals` reports the signals
+HCI-Core signals have parametric width; :numref:`hci_core_parameters` reports the
+parameters used by the HCI IPs; while :numref:`hci_core_signals` reports the signals
 used by the HCI-Core protocol.
 
 .. _hci_core_parameters:
@@ -353,12 +353,12 @@ the rules that have to be followed for a valid transaction.
   | *ORDERING*   | requests.                                                     |
   +--------------+---------------------------------------------------------------+
 
-.. _wavedrom_hci_core:
-.. wavedrom:: wavedrom/hci_core.json
-   :width: 100 %
-   :caption: Example of a HCI-Core transaction with *DW*=16-bit.
-
-:numref:`wavedrom_hci_core` shows an example of a correct HCI-Core transaction.
+.. .. _wavedrom_hci_core:
+.. .. wavedrom:: wavedrom/hci_core.json
+..    :width: 100 %
+..    :caption: Example of a HCI-Core transaction with *DW*=16-bit.
+.. 
+.. :numref:`wavedrom_hci_core` shows an example of a correct HCI-Core transaction.
 
 Exchanging data between HWPE-Mem and HWPE-Stream
 ------------------------------------------------
