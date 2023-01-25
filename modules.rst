@@ -261,7 +261,7 @@ hwpe_stream_addressgen_v3
     \clearpage
 
 Plain HWPE-Mem Streamer modules (deprecated)
-===========================================
+============================================
 
 The "plain" HWPE-Mem Streamer modules, although still functional, have
 generally been superseded by the HCI Streamer modules. We suggest using

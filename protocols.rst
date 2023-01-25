@@ -309,7 +309,7 @@ the rules that have to be followed for a valid transaction.
 
   +--------------+----------------------------------------------------------------+
   | **Rule**     | **Description**                                                |
-  +----------------+--------------------------------------------------------------+
+  +--------------+----------------------------------------------------------------+
   | RQ-1         | A valid handshake occurs in the cycle when both *req* and      |
   | *HANDSHAKE*  | *gnt* are asserted, for both write and read transactions.      |
   |              | All request phase signals are sampled on handshake cycles.     |
@@ -334,7 +334,7 @@ the rules that have to be followed for a valid transaction.
 
   +--------------+---------------------------------------------------------------+
   | **Rule**     | **Description**                                               |
-  +----------------+-------------------------------------------------------------+
+  +--------------+---------------------------------------------------------------+
   | RSP-1        | For read transactions, a valid handshake occurs in the cycle  |
   | *HANDSHAKE*  | when both *r_valid* and *lrdy* are asserted.                  |
   |              | All response phase signals are sampled on handshake cycles.   |
