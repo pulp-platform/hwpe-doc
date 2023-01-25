@@ -1,4 +1,4 @@
 pydotplus
-sphinxcontrib-wavedrom
+sphinxcontrib-wavedrom=2.1.1
 sphinx-book-theme
-wavedrom
+# wavedrom
