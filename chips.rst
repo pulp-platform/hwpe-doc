@@ -18,6 +18,14 @@ PULP chips
   * - Chip
     - Year
     - Notes
+  * - **Siracusa** http://asic.ethz.ch/2022/Siracusa.html    
+
+      .. figure:: http://asic.ethz.ch/2022/siracusa.JPG
+        :figwidth: 100%                                     
+        :width: 40%                                         
+        :align: center                                      
+    - 2022
+    - PULP cluster with *NEureka*
   * - **Darkside** http://asic.ethz.ch/2021/Darkside.html    
 
       .. figure:: http://asic.ethz.ch/2021/darkside_dark.JPG
