@@ -49,7 +49,7 @@ PULP chips
         :width: 40%                                        
         :align: center                                     
     - 2021
-    - PULP cluster with *SNE* and *PULP* (they do not directly use HWPE IPs, but they follow the same HWPE template)
+    - PULP cluster with *SNE* and *PULPO* (they do not directly use HWPE IPs, but they follow the same HWPE template)
   * - **Marsellus** http://asic.ethz.ch/2021/Marsellus.html  
                                                                 
       .. figure:: http://asic.ethz.ch/2021/Marsellus_die.jpg    

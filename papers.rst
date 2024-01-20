@@ -7,7 +7,7 @@ Disclaimer: most of these references are the effect of the point of view of myse
 Most papers are related to work on HWPEs performed in the context of the PULP project during my activity at University of Bologna (2012-ongoing)
 and ETH Zurich (2015-2020).
 Although there is a Other authors section, there may be several missing papers using the HWPE IPs and/or a 
-similar template. In case you spot a missing reference, let me know.
+similar template. In case you spot a missing reference, let me know and I'll be happy to amend the list.
 
 Hardware Accelerators based on HWPE template
 ============================================
@@ -30,9 +30,11 @@ HWPEs on FPGA
 
 HWPE-augmented SoC's
 ====================
+- **Siracusa**: A. S. Prasad, M. Scherer, F. Conti, D. Rossi, A. Di Mauro, M. Eggimann, J. T. Gomez, Z. Li, S. S. Sarwar, Z. Wang, B. De Salvo, and L. Benini, "Siracusa: A 16 nm Heterogenous RISC-V SoC for Extended Reality with At-MRAM Neural Engine." `[arXiv] <https://arxiv.org/pdf/2312.14750.pdf>`_
 - **Siracusa**: M. Scherer, M. Eggimann, A. Di Mauro, A. S. Prasad, F. Conti, D. Rossi, J. T. Gomez, Z. Li, S. S. Sarwar, Z. Wang, B. De Salvo, and L. Benini, "Siracusa: A Low-Power On-Sensor RISC-V SoC for Extended Reality Visual Processing in 16nm CMOS." ESSCIRC 2023-IEEE 49th European Solid State Circuits Conference (ESSCIRC), ESSCIRC 2023.
 - **Marsellus**: F. Conti, G. Paulin, A. Garofalo, D. Rossi, A. Di Mauro, G. Rutishauser, G. Ottavi, M. Eggimann, H. Okuhara, and L. Benini, "Marsellus: A Heterogeneous RISC-V AI-IoT End-Node SoC with 2-to-8b DNN Acceleration and 30%-Boost Adaptive Body Biasing," in IEEE Journal of Solid-State Circuits, doi: 10.1109/JSSC.2023.3318301.
 - **Marsellus**: F. Conti, D. Rossi, G. Paulin, A. Garofalo, A. Di Mauro, G. Rutishauser, G. Ottavi, M. Eggimann, H. Okuhara, V. Huard, O. Montfort, L. Jure, N. Exibard, P. Gouedo, M. Louvat, E. Botte, and L. Benini, "A 12.4 TOPS/W@ 136GOPS AI-IoT system-on-chip with 16 RISC-V, 2-to-8b precision-scalable DNN acceleration and 30%-boost adaptive body biasing," 2023 IEEE International Solid-State Circuits Conference (ISSCC), ISSCC 2023.
+- **Echoes**: M. Sinigaglia, L. Bertaccini, L. Valente, A. Garofalo, S. Benatti, L. Benini, F. Conti, and D. Rossi, "ECHOES: a 200 GOPS/W Frequency Domain SoC with FFT Processor and I2S DSP for Flexible Data Acquisition from Microphone Arrays," 2023 IEEE International Symposium on Circuits and Systems (ISCAS), Monterey, CA, USA, 2023, pp. 1-5, doi: 10.1109/ISCAS46773.2023.10181862. `[arXiv] <https://arxiv.org/pdf/2305.07325.pdf>`_
 - **Darkside**: A. Garofalo, Y. Tortorella, M. Perotti, L. Valente, A. Nadalini, L. Benini, D. Rossi, and F. Conti, "DARKSIDE: A Heterogeneous RISC-V Compute Cluster for Extreme-Edge On-Chip DNN Inference and Training," in IEEE Open Journal of the Solid-State Circuits Society, vol. 2, pp. 231-243, 2022, doi: 10.1109/OJSSCS.2022.3210082. `[open access] <https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9903915>`_
 - **Darkside**: A. Garofalo, M. Perotti, L. Valente, Y. Tortorella, A. Nadalini, L. Benini, D. Rossi, and F. Conti, "DARKSIDE: 2.6GFLOPS, 8.7mW Heterogeneous RISC-V Cluster for Extreme-Edge On-Chip DNN Inference and Training", ESSCIRC 2022- IEEE 48th European Solid State Circuits Conference (ESSCIRC), Milan, Italy, 2022, pp. 273-276, doi: 10.1109/ESSCIRC55480.2022.9911384.
 - **Vega**: D. Rossi, F. Conti, M. Eggimann, A. Di Mauro, G. Tagliavini, S. Mach, M. Guermandi, A. Pullini, I. Loi, J. Chen, E. Flamand, and L. Benini, "Vega: A 10-Core SoC for IoT End-Nodes with DNN Acceleration and Cognitive Wake-Up from MRAM-Based State-Retentive Sleep Mode," in IEEE Journal on Solid-State Circuits. `[arXiv] <https://arxiv.org/pdf/2110.09101.pdf>`_
