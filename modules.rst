@@ -1,6 +1,6 @@
-************
-Introduction
-************
+********************************************
+Hardware Processing Engines: Concept and IPs
+********************************************
 
 *Hardware Processing Engines* (HWPEs) are special-purpose,
 memory-coupled accelerators that can be inserted in the SoC or cluster
@@ -139,8 +139,91 @@ hwpe_stream_fifo_ctrl
 
     \clearpage
 
-Basic modules (HWPE-Mem / HWPE-MemDecoupled)
-============================================
+HCI Core modules
+================
+
+hci_core_assign
+---------------
+
+.. _hci_core_assign:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_assign.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_fifo
+-------------
+
+.. _hci_core_fifo:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_fifo.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_mux_dynamic
+--------------------
+
+.. _hci_core_mux_dynamic:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_mux_dynamic.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_mux_ooo
+----------------
+
+.. _hci_core_mux_ooo:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_mux_ooo.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_mux_static
+-------------------
+
+.. _hci_core_mux_static:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_mux_static.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_r_id_filter
+--------------------
+
+.. _hci_core_r_id_filter:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_r_id_filter.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_r_valid_filter
+-----------------------
+
+.. _hci_core_r_valid_filter:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_r_valid_filter.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_split
+--------------
+
+.. _hci_core_split:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_split.sv
+
+.. raw:: latex
+
+    \clearpage
+
+Basic modules (HWPE-Mem / HWPE-MemDecoupled - deprecated)
+=========================================================
 
 Basic HWPE-Mem management modules are used to delay/enqueue HWPE-MemDecoupled
 interfaces, multiplex multiple HWPE-Mem, or reorder them before hooking the
@@ -346,11 +429,44 @@ hwpe_stream_source_realign
 
     \clearpage
 
+HCI Interconnect modules
+========================
+
+hci_router
+----------
+
+.. _hci_router:
+.. svprettyplot:: ./ips/hci/rtl/interco/hci_router.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_arbiter
+-----------
+
+.. _hci_arbiter:
+.. svprettyplot:: ./ips/hci/rtl/interco/hci_arbiter.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_interconnect
+----------------
+
+.. _hci_interconnect:
+.. svprettyplot:: ./ips/hci/rtl/hci_interconnect.sv
+
+.. raw:: latex
+
+    \clearpage
+
 Control interface modules (HWPE-Periph)
 =======================================
 
 The control interface of HWPEs exposes a HWPE-Periph interface that is used
-to program a memory-mapped register file. T
+to program a memory-mapped register file.
 Several IPs can be used to compose the control interface, delivering a standard
 accelerator control interface that is described below.
 Modules performing these functions can be found within the `rtl/`
