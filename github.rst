@@ -20,3 +20,4 @@ Complex HWPEs:
 - https://github.com/pulp-platform/ne16 : Neural Engine (16 input-channels) - neural accelerator with flexible precision for weights (TinyML applications)
 - https://github.com/pulp-platform/neureka : NEureka Neural Engine - neural accelerator with flexible precision for weights (AR/VR applications)
 - https://github.com/pulp-platform/redmule : RedMulE (REDuced-precision Matrix MULtipication Engine) is a 8-bit and 16-bit floating-point systolic array
+- https://github.com/pulp-platform/ita : ITA (Integer Transformer Accelerator) - high efficiency accelerator focused on 8-bit transformer execution
