@@ -13,7 +13,6 @@ Current team
 - **Luka Macan**, SW integration in DORY/Deeploy, PhD student @ UNIBO, Italy
 - **Alessandro Nadalini**, course tutoring, PhD student @ UNIBO, Italy
 - **Luigi Ghionda**, FP FFT-HWPE architect, PhD student @ UNIBO, Italy
-- **Andrea Belano**, SoftEx architect, PhD student @ UNIBO, Italy
 - **Gamze Islamoglu**, ITA architect, PhD student @ ETHZ, Switzerland
 - **Philip Wiese**, ITA architect, PhD student @ ETHZ, Switzerland
 - **Lorenzo Greco**, in-memory computing acceleration, PhD student @ UNIBO, Italy
