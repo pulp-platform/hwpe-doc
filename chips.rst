@@ -18,6 +18,30 @@ PULP chips
   * - Chip
     - Year
     - Notes
+  * - **Megatron**
+
+      .. figure:: img/megatron.png
+        :figwidth: 100%                                     
+        :width: 40%                                         
+        :align: center                                      
+    - 2024
+    - PULP cluster with *Softex*, other accelerator.
+  * - **Astral** http://asic.ethz.ch/2024/Astral.html
+
+      .. figure:: http://asic.ethz.ch/2024/astral_sml.jpeg
+        :figwidth: 100%                                     
+        :width: 40%                                         
+        :align: center                                      
+    - 2024
+    - PULP cluster with *NEureka*, *RedMulE*, *Softex*.
+  * - **Maestro** http://asic.ethz.ch/2023/Maestro.html    
+
+      .. figure:: http://asic.ethz.ch/2023/maestro.jpg
+        :figwidth: 100%                                     
+        :width: 40%                                         
+        :align: center                                      
+    - 2023
+    - PULP cluster with *RedMulE* integrated with Spatz.
   * - **Siracusa** http://asic.ethz.ch/2022/Siracusa.html    
 
       .. figure:: http://asic.ethz.ch/2022/siracusa.JPG
@@ -25,7 +49,7 @@ PULP chips
         :width: 40%                                         
         :align: center                                      
     - 2022
-    - PULP cluster with *NEureka*
+    - PULP cluster with *NEureka* and MRAM integration.
   * - **Darkside** http://asic.ethz.ch/2021/Darkside.html    
 
       .. figure:: http://asic.ethz.ch/2021/darkside_dark.JPG
