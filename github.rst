@@ -11,13 +11,15 @@ IPs to build HWPE-based accelerators:
 
 Simple examples of HWPEs:
 
-- https://github.com/pulp-platform/hwpe-mac-engine : basic HWPE example with basic streamers - MAC engine with single Multiply-Accumulate
 - https://github.com/pulp-platform/hwpe-datamover-example : basic HWPE example with HCI streamers - pure datamover
+- https://github.com/pulp-platform/fir-hwpe/ : FIR filter HWPE designed as teaching aid
 
 Complex HWPEs:
 
 - https://github.com/pulp-platform/rbe : Reconfigurable Binary Engine - neural accelerator with flexible precision for weights and activations
-- https://github.com/pulp-platform/ne16 : Neural Engine (16 input-channels) - neural accelerator with flexible precision for weights (TinyML applications)
+- https://github.com/pulp-platform/ne16 : Neural Engine (16 input-channels) - neural accelerator with flexible precision for weights (GAP9-integrated)
 - https://github.com/pulp-platform/neureka : NEureka Neural Engine - neural accelerator with flexible precision for weights (AR/VR applications)
 - https://github.com/pulp-platform/redmule : RedMulE (REDuced-precision Matrix MULtipication Engine) is a 8-bit and 16-bit floating-point systolic array
 - https://github.com/pulp-platform/ita : ITA (Integer Transformer Accelerator) - high efficiency accelerator focused on 8-bit integer quantized transformer execution
+- https://github.com/belanoa/softex : Softex (SoftMax Engine) - parametric non-linear engine for Softmax and GELU
+   https://github.com/pulp-platform/datamover : Datamover / L1-L1 transpose unit

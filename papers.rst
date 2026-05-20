@@ -11,6 +11,7 @@ similar template. In case you spot a missing reference, let me know and I'll be 
 
 Hardware Accelerators based on HWPE template
 ============================================
+- **Softex**: A. Belano, Y. Tortorella, A. Garofalo, L. Benini, D. Rossi, and F. Conti, "A Flexible Template for Edge Generative AI with High-Accuracy Accelerated Softmax and GELU," in ,” IEEE J. Emerg. Sel. Topics Circuits Syst., vol. 15, no. 2, pp. 200–216, 2025. doi: 10.1109/JETCAS.2025.3562734 (**IEEE JETCAS 2026 Best Paper Award**).
 - **NEureka**: A. S. Prasad, L. Benini, and F. Conti, "Specialization meets Flexibility: a Heterogeneous Architecture for High-Efficiency, High-flexibility AR/VR Processing," in 2023 60th ACM/IEEE Design Automation Conference (DAC), DAC 2023. `[IEEE] <https://ieeexplore.ieee.org/document/10247945>`_
 - **SNE**: A. Di Mauro, A. S. Prasad, Z. Huang, M. Spallanzani, F. Conti, and L. Benini, "SNE: an Energy-Proportional Digital Accelerator for Sparse Event-Based Convolutions," in Design, Automation & Test in Europe Conference & Exhibition, DATE 2022. `[arXiv] <https://arxiv.org/abs/2204.10687>`_
 - **RedMulE**: Y. Tortorella, L. Bertaccini, D. Rossi, L. Benini, and F. Conti, "RedMulE: A Compact FP16 Matrix-Multiplication Accelerator for Adaptive Deep Learning on RISC-V-Based Ultra-Low-Power SoCs," in Design, Automation & Test in Europe Conference & Exhibition, DATE 2022. `[arXiv extension] <https://arxiv.org/pdf/2301.03904.pdf>`_
