@@ -238,8 +238,13 @@ This document focuses on the specific signal names used within HWPEs
 and in the reference implementation of HCI IPs.
 HCI-Core does not support bursts, but it supports in-order multiple
 outstanding transactions in a similar fashion to HWPE-MemDecoupled.
-Differently from HWPE-Mem, HCI-Core uses a two signal *handshake* but also
-includes an `lrdy` signal to support load backpressure on the response phase.
+Differently from HWPE-Mem, HCI-Core uses a two signal *handshake* on the request
+phase and a separate two signal *handshake* on the response phase (`r_valid` /
+`r_ready`), enabling load backpressure on the response.
+HCI-Core also carries an optional ID side channel (`id` / `r_id`) that can be
+used to distinguish in-flight transactions when traversing HCI interconnects,
+and an optional ECC side channel (see :ref:`hci_core_ecc`) to protect data and
+handshake signals.
 HCI-Core carries two phases, a *request* and a *response*.
 HCI-Core signals have parametric width; :numref:`hci_core_parameters` reports the
 parameters used by the HCI IPs; while :numref:`hci_core_signals` reports the signals
@@ -251,17 +256,15 @@ used by the HCI-Core protocol.
   +---------------+-------------------------------------------------+-------------+---------------------+
   | **Parameter** | **Description**                                 | **Default** | **Range**           |
   +---------------+-------------------------------------------------+-------------+---------------------+
-  | *DW*          | Data width in bits                              | 32          | mult. of *BW*, *WW* |
+  | *DW*          | Data width in bits                              | 32          | mult. of *BW*       |
   +---------------+-------------------------------------------------+-------------+---------------------+
   | *AW*          | Address width in bits                           | 32          | 1-32                |
   +---------------+-------------------------------------------------+-------------+---------------------+
   | *BW*          | Width of an individually strobed "byte" in bits | 8           | 1-32                |
   +---------------+-------------------------------------------------+-------------+---------------------+
-  | *WW*          | Width of a memory bank ("word") in bits         | 32          | mult. of *BW*       |
+  | *UW*          | User-defined side-channel width in bits         | 0           | 0-any               |
   +---------------+-------------------------------------------------+-------------+---------------------+
-  | *OW*          | Intra-bank offset width                         | 32          | 1-32                |
-  +---------------+-------------------------------------------------+-------------+---------------------+
-  | *UW*          | User-defined      width                         | 0           | 0-any               |
+  | *IW*          | Transaction ID width in bits                    | 8           | 0-any               |
   +---------------+-------------------------------------------------+-------------+---------------------+
 
 .. _hci_core_signals:
@@ -276,7 +279,7 @@ used by the HCI-Core protocol.
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
   | *r_valid*  | 1 bit                | Response HS | Response valid (1=asserted). Mandatory for load, optional for stores. | *slave* to *master* |
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
-  | *lrdy*     | 1 bit                | Response HS | Response load ready (1=asserted).                                     | *master* to *slave* |
+  | *r_ready*  | 1 bit                | Response HS | Response ready (1=asserted). Enables backpressure on the response.    | *master* to *slave* |
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
   | *add*      | *AW* bit             | Request     | Word-aligned memory address.                                          | *master* to *slave* |
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
@@ -284,19 +287,21 @@ used by the HCI-Core protocol.
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
   | *be*       | *DW/BW* bit          | Request     | Byte enable signal (1=valid byte).                                    | *master* to *slave* |
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
-  | *boffs*    | *DW/WW* x *OW* bit   | Request     | Intra-bank offset.                                                    | *master* to *slave* |
-  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
   | *data*     | *DW* bit             | Request     | Data word to be stored.                                               | *master* to *slave* |
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
-  | *user*     | *UW* bit             | Request     | User-defined.                                                         | *master* to *slave* |
+  | *user*     | *UW* bit             | Request     | User-defined request side channel.                                    | *master* to *slave* |
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
-  | *r_data*   | 32 bit               | Response    | Loaded data word.                                                     | *slave* to *master* |
+  | *id*       | *IW* bit             | Request     | Transaction identifier (request).                                     | *master* to *slave* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *r_data*   | *DW* bit             | Response    | Loaded data word.                                                     | *slave* to *master* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *r_user*   | *UW* bit             | Response    | User-defined response side channel.                                   | *slave* to *master* |
+  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
+  | *r_id*     | *IW* bit             | Response    | Transaction identifier (response, echoed from *id*).                  | *slave* to *master* |
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
   | *r_opc*    | 1 bit                | Response    | Error code response.                                                  | *slave* to *master* |
   +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
-  | *r_user*   | *UW* bit             | Request     | User-defined.                                                         | *slave* to *master* |
-  +------------+----------------------+-------------+-----------------------------------------------------------------------+---------------------+
-  
+
 The two phases of HCI-Core transactions can be treated as two separate channels,
 so HCI-Core transactions can be latency insensitive and support multiple
 in-order outstanding transactions (i.e., pipeline transactions).
@@ -336,12 +341,12 @@ the rules that have to be followed for a valid transaction.
   | **Rule**     | **Description**                                               |
   +--------------+---------------------------------------------------------------+
   | RSP-1        | For read transactions, a valid handshake occurs in the cycle  |
-  | *HANDSHAKE*  | when both *r_valid* and *lrdy* are asserted.                  |
+  | *HANDSHAKE*  | when both *r_valid* and *r_ready* are asserted.               |
   |              | All response phase signals are sampled on handshake cycles.   |
   +--------------+---------------------------------------------------------------+
   | RSP-2        | The assertion of *r_valid* (transition 0 to 1) cannot depend  |
-  | *NODEADLOCK* | combinationally on the state of *lrdy*. On the other hand,    |
-  |              | the assertion of *lrdy* (transition 0 to 1) can depend        |
+  | *NODEADLOCK* | combinationally on the state of *r_ready*. On the other hand, |
+  |              | the assertion of *r_ready* (transition 0 to 1) can depend     |
   |              | combinationally on the state of *r_valid*. This rule avoids   |
   |              | deadlocks in ping-pong logic.                                 |
   +--------------+---------------------------------------------------------------+
@@ -352,6 +357,56 @@ the rules that have to be followed for a valid transaction.
   | RSP-4        | Response phase signals must follow the same ordering of the   |
   | *ORDERING*   | requests.                                                     |
   +--------------+---------------------------------------------------------------+
+
+.. _hci_core_ecc:
+
+Optional ECC side channel
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The HCI-Core interface optionally exposes Error-Correcting Code (ECC) side
+channels to protect both the data payload and the handshake signals. These
+signals are always present in the interface, but are functionally inert
+(zero-width) when the corresponding parameters are left at their default
+value of 0. They are intended for use in safety- or reliability-critical
+deployments where end-to-end protection of HCI transactions is required.
+
+:numref:`hci_core_ecc_parameters` reports the additional parameters that
+control the ECC side channels, while :numref:`hci_core_ecc_signals` reports
+the related signals.
+
+.. _hci_core_ecc_parameters:
+.. table:: HCI-Core optional ECC parameters.
+
+  +---------------+-------------------------------------------------+-------------+-----------+
+  | **Parameter** | **Description**                                 | **Default** | **Range** |
+  +---------------+-------------------------------------------------+-------------+-----------+
+  | *EW*          | ECC width for the data payload in bits          | 0           | 0-any     |
+  +---------------+-------------------------------------------------+-------------+-----------+
+  | *EHW*         | ECC width for the handshake signals in bits     | 0           | 0-any     |
+  +---------------+-------------------------------------------------+-------------+-----------+
+
+.. _hci_core_ecc_signals:
+.. table:: HCI-Core optional ECC signals.
+
+  +------------+-----------+----------------+----------------------------------------------------+---------------------+
+  | **Signal** | **Size**  | **Phase**      | **Description**                                    | **Direction**       |
+  +------------+-----------+----------------+----------------------------------------------------+---------------------+
+  | *ecc*      | *EW* bit  | Request data   | ECC bits protecting the request *data* payload.    | *master* to *slave* |
+  +------------+-----------+----------------+----------------------------------------------------+---------------------+
+  | *r_ecc*    | *EW* bit  | Response data  | ECC bits protecting the response *r_data* payload. | *slave* to *master* |
+  +------------+-----------+----------------+----------------------------------------------------+---------------------+
+  | *ereq*     | *EHW* bit | Request HS     | ECC bits protecting the *req* handshake signal.    | *master* to *slave* |
+  +------------+-----------+----------------+----------------------------------------------------+---------------------+
+  | *egnt*     | *EHW* bit | Request HS     | ECC bits protecting the *gnt* handshake signal.    | *slave* to *master* |
+  +------------+-----------+----------------+----------------------------------------------------+---------------------+
+  | *r_evalid* | *EHW* bit | Response HS    | ECC bits protecting the *r_valid* handshake.       | *slave* to *master* |
+  +------------+-----------+----------------+----------------------------------------------------+---------------------+
+  | *r_eready* | *EHW* bit | Response HS    | ECC bits protecting the *r_ready* handshake.       | *master* to *slave* |
+  +------------+-----------+----------------+----------------------------------------------------+---------------------+
+
+When *EW* and *EHW* are set to 0, the ECC signals collapse to zero-width and
+have no functional effect; the interface then behaves identically to a plain
+HCI-Core interface.
 
 .. .. _wavedrom_hci_core:
 .. .. wavedrom:: wavedrom/hci_core.json
