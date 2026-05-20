@@ -22,4 +22,4 @@ Complex HWPEs:
 - https://github.com/pulp-platform/redmule : RedMulE (REDuced-precision Matrix MULtipication Engine) is a 8-bit and 16-bit floating-point systolic array
 - https://github.com/pulp-platform/ita : ITA (Integer Transformer Accelerator) - high efficiency accelerator focused on 8-bit integer quantized transformer execution
 - https://github.com/belanoa/softex : Softex (SoftMax Engine) - parametric non-linear engine for Softmax and GELU
-   https://github.com/pulp-platform/datamover : Datamover / L1-L1 transpose unit
+- https://github.com/pulp-platform/datamover : Datamover / L1-L1 transpose unit
