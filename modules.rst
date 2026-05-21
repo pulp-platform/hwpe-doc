@@ -152,6 +152,26 @@ hci_core_assign
 
     \clearpage
 
+hci_core_assign_expand
+----------------------
+
+.. _hci_core_assign_expand:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_assign_expand.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_cut
+------------
+
+.. _hci_core_cut:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_cut.sv
+
+.. raw:: latex
+
+    \clearpage
+
 hci_core_fifo
 -------------
 
@@ -323,11 +343,31 @@ hci_core_source
 
     \clearpage
 
+hci_core_source_v2
+------------------
+
+.. _hci_core_source_v2:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_source_v2.sv
+
+.. raw:: latex
+
+    \clearpage
+
 hci_core_sink
 -------------
 
 .. _hci_core_sink:
 .. svprettyplot:: ./ips/hci/rtl/core/hci_core_sink.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_core_sink_v2
+----------------
+
+.. _hci_core_sink_v2:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_sink_v2.sv
 
 .. raw:: latex
 
@@ -432,11 +472,39 @@ hwpe_stream_source_realign
 HCI Interconnect modules
 ========================
 
+The HCI Interconnect modules implement the routers, arbiters, and
+interconnects used to connect one or more HWPEs to the shared memory of a
+PULP cluster. The top-level **hci_interconnect** module composes a logarithmic
+interconnect and a router into a complete HCI interconnect; the other modules
+are the building blocks used internally or exposed for advanced use cases.
+Modules performing these functions can be found within the `rtl/interco`
+subfolder (and at the top level) of the `hci` repository.
+
+hci_interconnect
+----------------
+
+.. _hci_interconnect:
+.. svprettyplot:: ./ips/hci/rtl/hci_interconnect.sv
+
+.. raw:: latex
+
+    \clearpage
+
 hci_router
 ----------
 
 .. _hci_router:
 .. svprettyplot:: ./ips/hci/rtl/interco/hci_router.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_router_reorder
+------------------
+
+.. _hci_router_reorder:
+.. svprettyplot:: ./ips/hci/rtl/interco/hci_router_reorder.sv
 
 .. raw:: latex
 
@@ -452,11 +520,152 @@ hci_arbiter
 
     \clearpage
 
-hci_interconnect
+hci_arbiter_tree
 ----------------
 
-.. _hci_interconnect:
-.. svprettyplot:: ./ips/hci/rtl/hci_interconnect.sv
+.. _hci_arbiter_tree:
+.. svprettyplot:: ./ips/hci/rtl/interco/hci_arbiter_tree.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_log_interconnect
+--------------------
+
+.. _hci_log_interconnect:
+.. svprettyplot:: ./ips/hci/rtl/interco/hci_log_interconnect.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_log_interconnect_l2
+-----------------------
+
+.. _hci_log_interconnect_l2:
+.. svprettyplot:: ./ips/hci/rtl/interco/hci_log_interconnect_l2.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_new_log_interconnect
+------------------------
+
+.. _hci_new_log_interconnect:
+.. svprettyplot:: ./ips/hci/rtl/interco/hci_new_log_interconnect.sv
+
+.. raw:: latex
+
+    \clearpage
+
+Safe HCI (ECC and parity)
+=========================
+
+The Safe HCI modules provide end-to-end protection of HCI transactions for
+deployments with safety or reliability requirements. They are split in two
+complementary groups:
+
+- **ECC modules** implement the Error-Correcting Code side channel described
+  in :ref:`hci_core_ecc`. They provide encoders and decoders that protect
+  data payloads and handshake signals, ECC-aware variants of the source,
+  sink and interconnect modules, and a dedicated ECC manager that collects
+  error reports and exposes them through a memory-mapped register file.
+  These modules can be found within the `rtl/ecc` subfolder of the `hci`
+  repository.
+
+- **Parity (lockstep copy) modules** implement a duplicated-path
+  protection scheme in which a redundant *copy* source/sink runs in
+  lockstep with the primary streamer and raises a fault when the two
+  diverge. These modules can be found within the `rtl/parity` subfolder
+  of the `hci` repository.
+
+hci_ecc_enc
+-----------
+
+.. _hci_ecc_enc:
+.. svprettyplot:: ./ips/hci/rtl/ecc/hci_ecc_enc.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_ecc_dec
+-----------
+
+.. _hci_ecc_dec:
+.. svprettyplot:: ./ips/hci/rtl/ecc/hci_ecc_dec.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_ecc_source
+--------------
+
+.. _hci_ecc_source:
+.. svprettyplot:: ./ips/hci/rtl/ecc/hci_ecc_source.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_ecc_sink
+------------
+
+.. _hci_ecc_sink:
+.. svprettyplot:: ./ips/hci/rtl/ecc/hci_ecc_sink.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_ecc_interconnect
+--------------------
+
+.. _hci_ecc_interconnect:
+.. svprettyplot:: ./ips/hci/rtl/ecc/hci_ecc_interconnect.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_ecc_manager
+---------------
+
+.. _hci_ecc_manager:
+.. svprettyplot:: ./ips/hci/rtl/ecc/hci_ecc_manager.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_ecc_manager_reg_top
+-----------------------
+
+.. _hci_ecc_manager_reg_top:
+.. svprettyplot:: ./ips/hci/rtl/ecc/hci_ecc_manager_reg_top.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_copy_source
+---------------
+
+.. _hci_copy_source:
+.. svprettyplot:: ./ips/hci/rtl/parity/hci_copy_source.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_copy_sink
+-------------
+
+.. _hci_copy_sink:
+.. svprettyplot:: ./ips/hci/rtl/parity/hci_copy_sink.sv
 
 .. raw:: latex
 

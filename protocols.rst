@@ -408,38 +408,52 @@ When *EW* and *EHW* are set to 0, the ECC signals collapse to zero-width and
 have no functional effect; the interface then behaves identically to a plain
 HCI-Core interface.
 
-.. .. _wavedrom_hci_core:
-.. .. wavedrom:: wavedrom/hci_core.json
-..    :width: 100 %
-..    :caption: Example of a HCI-Core transaction with *DW*=16-bit.
-.. 
-.. :numref:`wavedrom_hci_core` shows an example of a correct HCI-Core transaction.
+.. _wavedrom_hci_core:
+.. wavedrom:: wavedrom/hci_core.json
+   :width: 100 %
+   :caption: Example of HCI-Core operation. Three in-order outstanding read
+            transactions are issued; the second request waits one cycle for
+            *gnt* before being granted (cycle 3), and the second response is
+            backpressured by *r_ready* (cycle 6). The *id* / *r_id* side
+            channel tags each transaction so that responses can be matched
+            to their requests.
 
-Exchanging data between HWPE-Mem and HWPE-Stream
+:numref:`wavedrom_hci_core` shows an example of a correct HCI-Core transaction.
+The request and response phases handshake independently: request phase signals
+are sampled when *req* and *gnt* are both asserted, while response phase
+signals are sampled when *r_valid* and *r_ready* are both asserted. This
+decoupling enables multiple outstanding transactions and load backpressure
+on the response, while rule RSP-4 (*ORDERING*) ensures that responses are
+delivered in the same order as the corresponding requests.
+
+Exchanging data between HCI-Core and HWPE-Stream
 ------------------------------------------------
 
 As HWPEs ultimately consume and produce data to the external shared
-memory using one or more ports exposing TCDM interfaces, converting data
-between HWPE-Mem and HWPE-Stream (i.e., exchanging data between the
-memory-based and the stream-based worlds) is one of the main tasks to be
-accomplished in the design of an accelerator. The HWPE-Stream and HWPE-Mem
-protocols are similar by design, which makes the handling of handshakes
-signficantly easier.
-The following applies to HWPE-Mem, HWPE-MemDecoupled, and HCI-Core in a similar
-manner.
+memory using one or more ports exposing HCI-Core (or, in legacy designs,
+HWPE-Mem) interfaces, converting data between HCI-Core and HWPE-Stream
+(i.e., exchanging data between the memory-based and the stream-based
+worlds) is one of the main tasks to be accomplished in the design of an
+accelerator. The HWPE-Stream and HCI-Core protocols are similar by
+design — both organize transactions around independent request and
+response handshakes that follow HWPE-Stream-like rules — which makes the
+handling of handshakes significantly easier.
+The following applies to HCI-Core, HWPE-MemDecoupled, and HWPE-Mem in a
+similar manner.
 
 Three objectives have to be met:
 
--  HWPE-Stream has no notion of address: to produce a stream out of HWPE-Mem
-   loads, or consume a stream in a series of HWPE-Mem stores, it is
+-  HWPE-Stream has no notion of address: to produce a stream out of HCI-Core
+   loads, or consume a stream in a series of HCI-Core stores, it is
    necessary to generate addresses according to some rule.
 
--  HWPE-Stream streams can be longer than 32 bits; it is necessary to
-   generate them from / split them into multiple TCDM loads/stores.
+-  HWPE-Stream streams can be wider than the HCI-Core *DW* data width;
+   it is necessary to generate them from / split them into multiple
+   HCI-Core loads/stores.
 
--  HWPE-Mem addresses may be misaligned with respect to word
-   boundaries, in which case two TCDM loads/stores are necessary to
-   transact a single 32-bit word and strobes have to be also aligned.
+-  HCI-Core addresses may be misaligned with respect to word
+   boundaries, in which case two HCI-Core loads/stores are necessary to
+   transact a single data word and strobes have to be also aligned.
 
 In the current version of the HWPE specifications, we address these
 issues by providing a set of modules which can incrementally be used to
@@ -451,10 +465,10 @@ solve each of the problems above. This are referred to in a later section.
   :width: 100%
   :align: center
 
-  Example of data exchange between a series of HWPE-Mem loads and a
+  Example of data exchange between a series of HCI-Core loads and a
   HWPE-Stream. Four data packets have to be produced at the sink end
   of the stream; since data is not well aligned in memory, this results
-  in five loads on the HWPE-Mem interface, which are then transformed
+  in five loads on the HCI-Core interface, which are then transformed
   in a strobed HWPE-Stream. The stream is then realigned so that the
   correct four elements are available.
 
@@ -464,17 +478,17 @@ solve each of the problems above. This are referred to in a later section.
   :width: 100%
   :align: center
 
-  Example of data exchange between a HWPE-Stream and a series of HWPE-Mem
+  Example of data exchange between a HWPE-Stream and a series of HCI-Core
   stores. Four data packets have to be consumed at the source end
   of the stream; since data is not well aligned in memory, this results
   in a strobed HWPE-Stream with five packets, the first and last of which
   contain also null data. The strobed stream is then converted in a set of
-  five HWPE-Mem store transactions.
+  five HCI-Core store transactions.
 
 :numref:`tcdm_stream_source`, :numref:`tcdm_stream_sink` show two
 examples of transactions going (respectively) from a series of loads
-on the HWPE-Mem interface to internal HWPE-Streams and from an internal
-HWPE-Stream to a series of stores on HWPE-Mem. The example focuses on
+on the HCI-Core interface to internal HWPE-Streams and from an internal
+HWPE-Stream to a series of stores on HCI-Core. The example focuses on
 the realignment behavior.
 
 HWPE-Periph protocol

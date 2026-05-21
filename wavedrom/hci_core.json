@@ -1,0 +1,28 @@
+{
+  "head" : {
+    "text" : "HCI-Core: three in-order outstanding read transactions with response backpressure"
+  },
+  "foot" : {
+    "tock" : 1
+  },
+  "config" : {
+    "hscale" : 2
+  },
+  "signal" : [
+    { "name": "clk_i", "wave": "p........." },
+    [ "Request",
+      { "name": "req",     "wave": "01..0.10.." },
+      { "name": "gnt",     "wave": "0.1.0.10.." },
+      { "name": "add",     "wave": "x=.=x.=x..", "data": ["A0", "A1", "A2"] },
+      { "name": "wen",     "wave": "x1..x.1x.." },
+      { "name": "id",      "wave": "x=.=x.=x..", "data": ["0", "1", "2"] }
+    ],
+    {},
+    [ "Response",
+      { "name": "r_valid", "wave": "0...1..010" },
+      { "name": "r_ready", "wave": "1....01..." },
+      { "name": "r_data",  "wave": "x...==.x=x", "data": ["D0", "D1", "D2"] },
+      { "name": "r_id",    "wave": "x...==.x=x", "data": ["0", "1", "2"] }
+    ]
+  ]
+}
