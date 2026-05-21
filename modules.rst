@@ -691,48 +691,36 @@ accelerator control interface that is described below.
 Modules performing these functions can be found within the `rtl/`
 subfolder of the `hwpe-ctrl` repository.
 
-.. Microcode processor
-.. ~~~~~~~~~~~~~~~~~~~
+.. raw:: latex
 
-.. The **hwpe_ctrl_ucode** module is a microcode processor that can be used
-.. to execute the main computation block of an HWPE (implemented within the
-.. “engine”) multiple times according to several rules, at the same time
-.. adapting the value of several internal parameters. The microcode
-.. processor can be used to execute a default number of 6 nested loops.
+    \clearpage
 
-.. The microcode supports four R/W registers and twelve R/O registers (by
-.. default); the microcode has two instructions: an **add** operation and a
-.. **move** operation. The **add** operation performs RA := RA + RB; the
-.. **move** operation performs RA := RB. R/O registers can only be used as
-.. RB. The R/W registers can be used to generate offsets to program the
-.. address generators, or for other purposes.
+hwpe_ctrl_target
+----------------
 
-.. The microcode can be specified in a “high-level” fashion in terms of
-.. YAML description, which can then be “compiled” by the *ucode_compile.py*
-.. Python script, also within the *hwpe-ctrl* repository. The compiler
-.. provides the two bit fields to be used to program the HWPE microcode
-.. processor, typically this is either hardwired or passed through
-.. job-independent registers.
+.. _hwpe_ctrl_target:
+.. svprettyplot:: ./ips/hwpe-ctrl/rtl/hwpe_ctrl_target.sv
 
-.. Slave interface and register file
-.. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. raw:: latex
 
-.. The **hwpe_ctrl_slave** module implements the PERIPH slave interface.
-.. The **hwpe_ctrl_regfile**, which is instantiated inside it, implements
-.. the actual register file. The register file contains N_GENERIC_REGS
-.. registers which are non-contexted, i.e. their value stays constant
-.. between consecutive job offloads; and N_IO_REGS registers which are
-.. contexted, i.e. which are used to implement a queue of jobs that can be
-.. offloaded also when the HWPE is active. The slave module also generates
-.. the events that are propagated in the PULP platform.
+    \clearpage
 
-.. Sequential multiplier
-.. ~~~~~~~~~~~~~~~~~~~~~
+hwpe_ctrl_uloop
+---------------
 
-.. The **hwpe_ctrl_seq_mult** module is a utility module to implement a
-.. sequential multiplier; it can be used to produce derivative parameters
-.. e.g. for usage as read-only registers in the microcode processor. When
-.. the *start* input is asserted, the multiplier will start compute the
-.. product of the two inputs *a* and *b*. The sequential multiplier takes
-.. *width(a)* cycles to compute the output and asserts a valid bit when the
-.. product has been computed.
+.. _hwpe_ctrl_uloop:
+.. svprettyplot:: ./ips/hwpe-ctrl/rtl/hwpe_ctrl_uloop.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hwpe_ctrl_seq_mult
+------------------
+
+.. _hwpe_ctrl_seq_mult:
+.. svprettyplot:: ./ips/hwpe-ctrl/rtl/hwpe_ctrl_seq_mult.sv
+
+.. raw:: latex
+
+    \clearpage
