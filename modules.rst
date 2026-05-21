@@ -540,15 +540,15 @@ hci_log_interconnect
 
     \clearpage
 
-hci_log_interconnect_l2
------------------------
+.. hci_log_interconnect_l2
+.. -----------------------
 
-.. _hci_log_interconnect_l2:
-.. svprettyplot:: ./ips/hci/rtl/interco/hci_log_interconnect_l2.sv
+.. .. _hci_log_interconnect_l2:
+.. .. svprettyplot:: ./ips/hci/rtl/interco/hci_log_interconnect_l2.sv
 
-.. raw:: latex
+.. .. raw:: latex
 
-    \clearpage
+..     \clearpage
 
 hci_new_log_interconnect
 ------------------------
