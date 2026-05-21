@@ -119,6 +119,16 @@ hwpe_stream_fifo
 
     \clearpage
 
+hwpe_stream_fifo_passthrough
+----------------------------
+
+.. _hwpe_stream_fifo_passthrough:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/fifo/hwpe_stream_fifo_passthrough.sv
+
+.. raw:: latex
+
+    \clearpage
+
 hwpe_stream_fifo_earlystall
 ---------------------------
 
