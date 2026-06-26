@@ -222,6 +222,16 @@ hci_core_mux_static
 
     \clearpage
 
+hci_core_rob
+--------------
+
+.. _hci_core_rob:
+.. svprettyplot:: ./ips/hci/rtl/core/hci_core_rob.sv
+
+.. raw:: latex
+
+    \clearpage
+
 hci_core_r_id_filter
 --------------------
 
@@ -247,6 +257,37 @@ hci_core_split
 
 .. _hci_core_split:
 .. svprettyplot:: ./ips/hci/rtl/core/hci_core_split.sv
+
+.. raw:: latex
+
+    \clearpage
+
+Connection to variable-latency interconnect (TeraPool systems)
+==============================================================
+
+The following modules are used to provide an interface between HCI systems
+and systems using the variable-latency interconnect (typically in a TeraPool
+configuration).
+
+.. raw:: latex
+
+    \clearpage
+
+hci_variablelatency_assign
+--------------------------
+
+.. _hci_variablelatency_assign:
+.. svprettyplot:: ./ips/hci/rtl/variablelatency/hci_variablelatency_assign.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hci_variablelatency_tocore
+--------------------------
+
+.. _hci_variablelatency_tocore:
+.. svprettyplot:: ./ips/hci/rtl/variablelatency/hci_variablelatency_tocore.sv
 
 .. raw:: latex
 
@@ -383,11 +424,21 @@ hci_core_sink_v2
 
     \clearpage
 
-hwpe_stream_addressgen_v3
+hwpe_stream_addressgen_v3 (deprecated for new HWPEs)
 -------------------------
 
 .. _hwpe_stream_addressgen_v3:
 .. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_addressgen_v3.sv
+
+.. raw:: latex
+
+    \clearpage
+
+hwpe_stream_addressgen_v4
+-------------------------
+
+.. _hwpe_stream_addressgen_v4:
+.. svprettyplot:: ./ips/hwpe-stream/rtl/streamer/hwpe_stream_addressgen_v4.sv
 
 .. raw:: latex
 
